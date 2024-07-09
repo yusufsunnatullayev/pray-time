@@ -13,14 +13,6 @@ const input = document.querySelector("input"),
 
 let loader = false; // Changed 'const' to 'let' to allow reassignment
 
-if (loader) {
-  loading.classList.remove("hide");
-  loading.classList.add("show");
-} else {
-  loading.classList.remove("show");
-  loading.classList.add("hide");
-}
-
 const API_KEY = "bba7ab9bd035d049765305fef6073578";
 
 async function fetchData(city) {
@@ -42,6 +34,15 @@ async function fetchData(city) {
   } catch (error) {
     loader = false; // Changed 'const' to 'let' to allow reassignment
     console.log(error);
+    fajrSpan.textContent = "";
+    shuroqSpan.textContent = "";
+    dhuhrSpan.textContent = "";
+    asrSpan.textContent = "";
+    maghribSpan.textContent = "";
+    ishaSpan.textContent = "";
+    alert(
+      "Could not find your searched location, please use different word/location and try again."
+    );
   }
 }
 
@@ -50,4 +51,11 @@ form.addEventListener("submit", (e) => {
   loader = true; // Changed 'const' to 'let' to allow reassignment
   fetchData(input.value);
   input.value = "";
+  if (loader) {
+    loading.classList.remove("hide");
+    loading.classList.add("show");
+  } else {
+    loading.classList.remove("show");
+    loading.classList.add("hide");
+  }
 });
